@@ -1,0 +1,97 @@
+/* Full page wrapper */
+.user-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #ddd;
+  padding: 20px;
+  
+  box-sizing: border-box;
+}
+
+/* Form container */
+.user-form {
+  background-color: white;
+  color: #000;
+  border-radius: 12px;
+    box-shadow: 0 0 12px #222222aa;
+  padding: 30px 25px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-sizing: border-box;
+}
+
+/* Heading */
+.form-heading {
+  color: #e50914;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Input fields */
+.user-form input {
+  padding: 12px;
+  border: 1px solid #e50914;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #222;
+  color: white;
+}
+
+.user-form input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #222 inset !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Button group (aligned right inside the form) */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Login/Register button */
+.signup-btn {
+  background-color: #e50914;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #6b080d;
+}
+
+/* Toggle button placed BELOW the form box */
+.toggle-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Toggle button style */
+.auth-toggle-btn {
+  background: none;
+  color: #555;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.auth-toggle-btn:hover {
+  color: #e50914;
+}

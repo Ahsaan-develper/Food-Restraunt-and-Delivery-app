@@ -1,0 +1,73 @@
+/* Body background */
+body {
+  background-color: #ddd;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Wrapper for the whole cart page */
+.wrapper {
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Charges Summary Box */
+.summary {
+  background-color: #ffffffcd;
+  border: 2px solid #e50914;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px 0;
+}
+
+/* Section headers */
+.summary h1 {
+  text-align: center;
+  color: #e50914;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Each row of charges */
+.charge-items {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  color: #222;
+  font-size: 16px;
+}
+
+/* Highlight for total */
+.charge-items .total {
+  font-weight: bold;
+  color: #000;
+  font-size: 18px;
+  border-top: 2px solid #000;
+  margin-top: 10px;
+  padding-top: 12px;
+}
+
+/* Order Now button */
+.summary button {
+  background-color: #e50914;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 25px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.summary button:hover {
+  background-color: #b20710;
+}

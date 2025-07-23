@@ -1,0 +1,74 @@
+/* Center page content */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffffb9; /* white background */
+}
+
+/* Styling the form box */
+.food-form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 15px;
+  color: red;
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid black; /* black border around form */
+  box-shadow: 0 0 20px rgb(255, 255, 255); /* white glow */
+}
+
+/* Input field styling */
+.food-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  color: black;
+  border: 1px solid black; /* black border on inputs */
+  border-radius: 5px;
+  outline: none;
+  background-color: white;
+}
+.food-form input:focus{
+      border: 1px solid red;
+}
+/* Error text */
+.error-text {
+  color: red;
+  font-size: 14px;
+}
+
+/* Button row styling */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* General button styling */
+.btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid red;
+}
+
+/* Red button with white text */
+.btn.red,
+.btn.black {
+  background-color: red;
+  color: white;
+}
+
+/* Hover effect: switch to black bg and white text */
+.btn:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}

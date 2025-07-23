@@ -1,0 +1,102 @@
+.food-form {
+  background-color: #000; /* black background */
+  color: white; /* white text */
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  margin: 30px auto;
+  box-shadow: 0 0 10px red;
+}
+
+.food-form h1 {
+  color: red;
+  text-align: center;
+}
+.food-form input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.food-form input::placeholder {
+  color: #aaa;
+}
+
+.food-form button {
+  width: 100%;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.food-form button:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+}
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2; /* light gray background */
+}
+
+.food-form {
+  background-color: white; /* white box */
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* soft red glow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.food-form h1 {
+  color: red;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.food-form input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  background-color: #fff;
+  color: black;
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.food-form input::placeholder {
+  color: #999;
+}
+
+.food-form button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.food-form button:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+}

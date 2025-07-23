@@ -1,0 +1,133 @@
+/* Wrapper for the whole page */
+body{
+  background-color: #ddd;
+}
+.explore-wrapper {
+  font-family: Arial, sans-serif;
+}
+
+/* Top banner section */
+.home-wrapper {
+  position: relative;
+  text-align: center;
+}
+
+.background-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  opacity: 0.85;
+  border-bottom: 4px solid #ddd;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 40px;
+}
+
+/* Restaurant detail box */
+
+.restaurant-box { 
+  background-color: white;
+  padding: 16px;
+  color: #c00;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 16px auto;
+  width: 90%;
+  max-width: 1000px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid tomato;
+  border-right: 4px solid tomato;
+  border-bottom: 4px solid #333; 
+  border-top: 4px solid #333; 
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+
+/* Mobile screens (max-width 600px) */
+@media screen and (max-width: 600px) {
+  .restaurant-box {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    font-size: 0.9rem;
+    width: 95%;
+    margin: 10px auto;
+  }
+}
+
+/* Extra small devices (max-width 375px) */
+@media screen and (max-width: 375px) {
+  .restaurant-box {
+    font-size: 0.85rem;
+    padding: 10px;
+    width: 98%;
+  }
+}
+
+
+/* Food section grid */
+.food-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+ 
+}
+
+/* Each food card */
+.food-card {
+  background: #fff;
+  border-radius: 10px;
+  border-bottom: 4px solid #c00;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s;
+}
+
+.food-card:hover {
+  transform: scale(1.03);
+   
+}
+
+.food-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.food-info {
+  padding: 15px;
+}
+
+.food-info h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.food-info p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+.no-data-msg {
+  text-align: center;
+  color: #c00;
+  margin: 20px 0;
+}
+.cart-btn{
+color: #c00;
+}

@@ -1,95 +1,113 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import { useEffect, useState } from "react";
+import CustomerHeader from "./_components/customerHeader";
+import RestaurantFooter from "./_components/restrauntFooter";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function Page() {
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [restraunt,setRestraunt] = useState([])
+  const router = useRouter();
+
+  useEffect(() => {
+    loadLocations();
+    loadRestraunt();
+  }, []);
+const loadRestraunt = async (params) => {
+  let url = "http://localhost:3000/api/customer";
+
+  if (params?.location) {
+    url += `?location=${params.location}`;
+  } else if (params?.restraunt) {
+    url += `?restraunt=${params.restraunt}`;
+  }
+
+  let response = await fetch(url);
+  response = await response.json();
+
+  if (response.success) {
+    setRestraunt(response.result);
+  }
+};
+
+  const loadLocations = async () => {
+    let response = await fetch("http://localhost:3000/api/customer/location");
+    response = await response.json();
+    if (response.success) {
+      setLocations(response.result);
+    }
+  };
+
+  const handleSelect = (city) => {
+    setSelectedLocation(city);
+    setShowDropdown(false);
+    loadRestraunt({location:city})
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <main>
+      <CustomerHeader />
+      <div className="home-wrapper">
+        <img
+          className="background-img"
+          src="https://png.pngtree.com/thumb_back/fh260/background/20230204/pngtree-burger-fire-food-hd-background-image_1541161.jpg"
+          alt="background"
         />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+        <div className="overlay-content">
+          <h1>Food Delivery App</h1>
+          <div className="search-fields">
+            <input
+              type="text"
+              value={selectedLocation}
+              placeholder="Select Place"
+              onFocus={() => setShowDropdown(true)}
+              onChange={(e) => setSelectedLocation(e.target.value)}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+            {
+                showDropdown&&   (
+                <ul className="dropdown-list">
+                  {
+                 locations.map((item, index) => (
+                      <li key={index} onClick={() => handleSelect(item)}>
+                        {item}
+                      </li>
+                    ))
+                  }
+                </ul>
+              )
+            }
+            <input type="text" onChange={(e)=>loadRestraunt({restraunt:e.target.value})} placeholder="Enter restaurant name" />
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      <div className="load-data">
+       
+        {
+          restraunt.map((item)=>{
+       return     <div key={item.id} onClick={() => router.push(`explor/${item.name}/?id=${item._id}`)} className="load-content">
+            <div className="name">
+                <h1>{  item.name}</h1>
+            </div>
+            <div className="city">
+                <h3>{item.city}</h3>
+            </div>
+             <div className="email">
+                <h5><strong>Email:</strong> { item.email}</h5>
+            </div>
+          <div className="address">
+               <h5><strong>Address:</strong> {item.address}</h5>
+           </div>
+          <div className="contact">
+                <h5><strong>Contact:</strong> { item.contact}</h5>
+             </div>
+                </div>
+           })
+        }
+      </div>
+      <RestaurantFooter />
+    </main>
   );
 }
