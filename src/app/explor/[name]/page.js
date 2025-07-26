@@ -5,7 +5,7 @@ import CustomerHeader from "@/app/_components/customerHeader";
 import RestaurantFooter from "@/app/_components/restrauntFooter";
 
 export default function RestrauntExplore({ params, searchParams }) {
-  let name = params.name;
+  let name = decodeURIComponent(params.name);
 
   const [restruntDetails, setRestrauntDetails] = useState();
   const [foodDetails, setFoodDetails] = useState();

@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import DeliveryHeader from "../_components/deliverHeader";
 import RestaurantFooter from "../_components/restrauntFooter";
+import "./deliverydashboard.css"
 import { useEffect, useState } from "react";
 
 export default function DeliveryDashboard() {
@@ -29,7 +30,6 @@ export default function DeliveryDashboard() {
         : Object.values(data.result);
 
       setMyOrders(orders);
-      console.log("Orders:", orders);
     } catch (err) {
       console.error("Failed to load orders:", err);
     }

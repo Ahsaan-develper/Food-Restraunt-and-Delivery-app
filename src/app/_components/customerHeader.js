@@ -4,55 +4,52 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function CustomerHeader(props) {
-  const router= useRouter();
-  const storage = localStorage.getItem("customer");
+  const router = useRouter();
+  const [storage, setStorage] = useState(null);
+  const [cartItem, setCartItem] = useState([]);
+  const [cartNumber, setCartNumber] = useState(0);
 
-  let cartData = [];
-  try {
-    const raw = localStorage.getItem("cart");
-    if (raw) {
-      cartData = JSON.parse(raw);
+  useEffect(() => {
+    // ✅ Runs only on client
+    const customerData = localStorage.getItem("customer");
+    setStorage(customerData);
+
+    try {
+      const raw = localStorage.getItem("cart");
+      if (raw) {
+        const parsedCart = JSON.parse(raw);
+        setCartItem(parsedCart);
+        setCartNumber(parsedCart.length);
+      }
+    } catch (e) {
+      console.error("Invalid cart JSON in localStorage:", e);
+      localStorage.removeItem("cart");
     }
-  } catch (e) {
-    console.error("Invalid cart JSON in localStorage:", e);
-    localStorage.removeItem("cart");
-    cartData = [];
-  }
-
-  const [cartNumber, setCartNumber] = useState(cartData.length);
-  const [cartItem, setCartItem] = useState(cartData);
+  }, []);
 
   useEffect(() => {
     if (props.cart) {
-      if (cartItem.length > 0) {
-        if (cartItem[0].foodie_id !== props.cart.foodie_id) {
-          // Different restaurant, reset cart
-          localStorage.removeItem("cart");
-          setCartItem([props.cart]);
+      setCartItem((prevCart) => {
+        if (prevCart.length > 0 && prevCart[0].foodie_id !== props.cart.foodie_id) {
+          const newCart = [props.cart];
           setCartNumber(1);
-          localStorage.setItem("cart", JSON.stringify([props.cart]));
+          localStorage.setItem("cart", JSON.stringify(newCart));
+          return newCart;
         } else {
-          // Same restaurant, add to cart
-          const updatedCart = [...cartItem, props.cart];
-          setCartItem(updatedCart);
-          setCartNumber(updatedCart.length);
-          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          const newCart = [...prevCart, props.cart];
+          setCartNumber(newCart.length);
+          localStorage.setItem("cart", JSON.stringify(newCart));
+          return newCart;
         }
-      } else {
-        // First item in cart
-        setCartItem([props.cart]);
-        setCartNumber(1);
-        localStorage.setItem("cart", JSON.stringify([props.cart]));
-      }
+      });
     }
   }, [props.cart]);
 
-  // ✅ Handle cart item removal
   useEffect(() => {
     if (props.removeCartItem) {
       const updatedCart = cartItem.filter(item => item._id !== props.removeCartItem);
       setCartItem(updatedCart);
-      setCartNumber(cartNumber-1);
+      setCartNumber(updatedCart.length);
       if (updatedCart.length === 0) {
         localStorage.removeItem("cart");
       } else {
@@ -60,10 +57,12 @@ export default function CustomerHeader(props) {
       }
     }
   }, [props.removeCartItem]);
-const logout =()=>{
-  localStorage.removeItem("customer");
-  router.push("/user_auth")
-}
+
+  const logout = () => {
+    localStorage.removeItem("customer");
+    router.push("/user_auth");
+  };
+
   return (
     <div className="customer-header">
       <img
@@ -72,20 +71,17 @@ const logout =()=>{
       />
       <ul>
         <Link className="no-underline" href="/"><li>Home</li></Link>
-        {
-          storage ? 
-          <>
+        {storage ? (
           <button onClick={logout}>Logout</button>
-          </>:
+        ) : (
           <>
-          <Link className="no-underline" href="/user_auth"><li>Login</li></Link>
-        <Link className="no-underline" href="/user_auth"><li>Sign Up</li></Link></>
-        }
-      
-        <Link className="no-underline" href={cartNumber?"/cart":"#"}> <li>Cart ({cartNumber})</li></Link>
-        <Link className="no-underline" href={"/restraunt"}><li>Add Restraunt</li></Link>
-        <Link className="no-underline" href={"/deliverypartner"}><li>Delivery Partner</li></Link>
-       
+            <Link className="no-underline" href="/user_auth"><li>Login</li></Link>
+            <Link className="no-underline" href="/user_auth"><li>Sign Up</li></Link>
+          </>
+        )}
+        <Link className="no-underline" href={cartNumber ? "/cart" : "#"}> <li>Cart ({cartNumber})</li></Link>
+        <Link className="no-underline" href="/restraunt"><li>Add Restraunt</li></Link>
+        <Link className="no-underline" href="/deliverypartner"><li>Delivery Partner</li></Link>
       </ul>
     </div>
   );
